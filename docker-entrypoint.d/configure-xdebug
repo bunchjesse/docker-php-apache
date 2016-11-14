@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ "$XDEBUG_ENABLED" == "0" ]
+then
+  echo "Xdebug is disabled"
+  rm -f /usr/local/etc/php/conf.d/xdebug.ini
+else
+  echo "Xdebug is enabled"
+fi

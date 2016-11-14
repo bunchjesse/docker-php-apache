@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ "$PHP_OPCACHE_ENABLED" == "0" ]
+then
+  echo "PHP opcache is disabled"
+  rm -f /usr/local/etc/php/conf.d/opcache.ini
+else
+  echo "PHP opcache is enabled"
+fi

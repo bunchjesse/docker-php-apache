@@ -35,6 +35,9 @@ default: `32M`
 #### PHP_UPLOAD_MAX_FILESIZE
 default: `16M`
 
+#### PHP_ERROR_REPORTING
+default: `E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED`
+
 ### Xdebug
 Xdebug is installed and can be configured with the following environment variables:
 
@@ -56,6 +59,15 @@ default: `localhost`
 #### XDEBUG_IDEKEY
 default: `docker`
 
+#### XDEBUG_VAR_DISPLAY_MAX_CHILDREN
+default: `128`
+
+#### XDEBUG_VAR_DISPLAY_MAX_DATA
+default: `512`
+
+#### XDEBUG_VAR_DISPLAY_MAX_DEPTH
+default: `5`
+
 ### Opcode Caching
 Xdebug is installed and can be enabled or disabled with an environment variable:
 
@@ -69,4 +81,8 @@ Composer is installed along with [Prestissimo](https://github.com/hirak/prestiss
 Both are installed and ready to go.
 
 ## Runtime Scripts
-This image follows the [Flexible Docker entrypoints scripts](http://www.camptocamp.com/en/actualite/flexible-docker-entrypoints-scripts/) format in that there is a `/docker-entrypoint.d` folder that contains all of the scripts that will be run at startup *before* apache2 is started. Internally, this is used to do some last minute tweaking of things based on the environment. You may add whatever scripts you want to this (make sure to chmod +x them!) and they'll be run also.
+This image follows the [Flexible Docker entrypoints scripts](http://www.camptocamp.com/en/actualite/flexible-docker-entrypoints-scripts/) format in that there is a `/docker-entrypoint.d` folder that contains all of the scripts that will be run at startup *before* apache2 is started. Internally, this is used to do some last minute tweaking of things based on the environment. You may add whatever scripts you want to this (make sure to chmod +x them!) and they'll be run also. If your script is working, you'll see `run-parts` say that it is being executed when the application is booted. Something like:
+
+```
+run-parts: executing /docker-entrypoint.d/set-permissions
+```

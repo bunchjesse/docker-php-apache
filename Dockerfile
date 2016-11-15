@@ -11,10 +11,14 @@ ENV APACHE_DOCUMENT_ROOT=/web/public \
     XDEBUG_REMOTE_CONNECT_BACK=0 \
     XDEBUG_REMOTE_HOST=localhost \
     XDEBUG_IDEKEY=docker \
+    XDEBUG_VAR_DISPLAY_MAX_CHILDREN=128 \
+    XDEBUG_VAR_DISPLAY_MAX_DATA=512 \
+    XDEBUG_VAR_DISPLAY_MAX_DEPTH=5 \
     PHP_OPCACHE_ENABLED=1 \
     PHP_MEMORY_LIMIT=16M \
     PHP_POST_MAX_SIZE=32M \
-    PHP_UPLOAD_MAX_FILESIZE=16M
+    PHP_UPLOAD_MAX_FILESIZE=16M \
+    PHP_ERROR_REPORTING="E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED"
 
 # Fixes issues with docker exec
 # See https://github.com/dockerfile/mariadb/issues/3
@@ -55,9 +59,9 @@ RUN apt-get install -y \
 
 # Xdebug
 RUN cd /tmp \
-    && curl -o xdebug-2.5.0RC1.tgz https://xdebug.org/files/xdebug-2.5.0RC1.tgz \
-    && tar -xvzf xdebug-2.5.0RC1.tgz \
-    && cd xdebug-2.5.0RC1 \
+    && curl -o xdebug-2.4.1.tgz https://xdebug.org/files/xdebug-2.4.1.tgz \
+    && tar -xvzf xdebug-2.4.1.tgz \
+    && cd xdebug-2.4.1 \
     && phpize \
     && ./configure \
     && make \

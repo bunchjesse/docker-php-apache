@@ -57,6 +57,12 @@ RUN apt-get install -y \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && composer global require "hirak/prestissimo:^0.3"
 
+# Apache Extensions
+RUN cd /tmp \
+    && curl -o mod_cloudflare-trusty-amd64.latest.deb https://www.cloudflare.com/static/misc/mod_cloudflare/ubuntu/mod_cloudflare-trusty-amd64.latest.deb \
+    && dpkg -i mod_cloudflare-trusty-amd64.latest.deb \
+    && rm -f mod_cloudflare-trusty-amd64.latest.deb
+
 # Xdebug
 RUN cd /tmp \
     && curl -o xdebug-2.4.1.tgz https://xdebug.org/files/xdebug-2.4.1.tgz \

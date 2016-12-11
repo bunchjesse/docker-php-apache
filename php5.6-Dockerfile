@@ -1,4 +1,4 @@
-FROM php:7.0-apache
+FROM php:5.6-apache
 MAINTAINER Jesse Bunch <jesse@getbunch.com>
 
 # Container configuration
@@ -65,13 +65,13 @@ RUN cd /tmp \
 
 # Xdebug
 RUN cd /tmp \
-    && curl -o xdebug-2.4.1.tgz https://xdebug.org/files/xdebug-2.4.1.tgz \
-    && tar -xvzf xdebug-2.4.1.tgz \
-    && cd xdebug-2.4.1 \
+    && curl -o xdebug-2.5.0.tgz https://xdebug.org/files/xdebug-2.5.0.tgz \
+    && tar -xvzf xdebug-2.5.0.tgz \
+    && cd xdebug-2.5.0 \
     && phpize \
     && ./configure \
     && make \
-    && mv modules/xdebug.so /usr/local/lib/php/extensions/no-debug-non-zts-20151012/
+    && mv modules/xdebug.so /usr/local/lib/php/extensions/no-debug-non-zts-20131226/
 
 # NodeJS
 RUN curl -sL https://deb.nodesource.com/setup_7.x | bash - \
@@ -92,7 +92,8 @@ RUN a2enmod actions ssl rewrite headers \
     && a2ensite docker
 
 # Configure PHP
-COPY /php-conf.d /usr/local/etc/php/conf.d
+COPY /php-conf.d/shared/* /usr/local/etc/php/conf.d/
+COPY /php-conf.d/php5.6/* /usr/local/etc/php/conf.d/
 
 # Run
 COPY /docker-entrypoint.sh /docker-entrypoint.sh

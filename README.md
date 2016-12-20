@@ -38,6 +38,9 @@ default: `16M`
 #### PHP_ERROR_REPORTING
 default: `E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED`
 
+#### PHP_MAX_INPUT_VARS
+default: `2000`
+
 ### Xdebug
 Xdebug is installed and can be configured with the following environment variables:
 

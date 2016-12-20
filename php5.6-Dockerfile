@@ -18,7 +18,8 @@ ENV APACHE_DOCUMENT_ROOT=/web/public \
     PHP_MEMORY_LIMIT=16M \
     PHP_POST_MAX_SIZE=32M \
     PHP_UPLOAD_MAX_FILESIZE=16M \
-    PHP_ERROR_REPORTING="E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED"
+    PHP_ERROR_REPORTING="E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED" \
+    PHP_MAX_INPUT_VARS=2000
 
 # Fixes issues with docker exec
 # See https://github.com/dockerfile/mariadb/issues/3

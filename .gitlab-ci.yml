@@ -1,0 +1,15 @@
+build:
+  stage: build
+  image: docker:latest
+  variables:
+    DOCKER_DRIVER: overlay
+  services:
+  - docker:dind
+  before_script:
+  - docker info
+  script:
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+  - docker build . -f php7.0-Dockerfile -t registry.gitlab.com/bunchjesse/docker-caddy-php:php7.0-caddy1.0
+  - docker push registry.gitlab.com/bunchjesse/docker-caddy-php:php7.0-caddy1.0
+  - docker build . -f php7.1-Dockerfile -t registry.gitlab.com/bunchjesse/docker-caddy-php:php7.1-caddy1.0
+  - docker push registry.gitlab.com/bunchjesse/docker-caddy-php:php7.1-caddy1.0

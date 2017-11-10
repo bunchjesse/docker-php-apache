@@ -61,7 +61,7 @@ RUN apt-get install -y \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-    && composer global require "hirak/prestissimo:^0.3"
+    && composer global require "hirak/prestissimo"
 
 # Apache Extensions
 RUN cd /tmp \
@@ -71,9 +71,9 @@ RUN cd /tmp \
 
 # Xdebug
 RUN cd /tmp \
-    && curl -o xdebug-2.5.0.tgz https://xdebug.org/files/xdebug-2.5.0.tgz \
-    && tar -xvzf xdebug-2.5.0.tgz \
-    && cd xdebug-2.5.0 \
+    && curl -o xdebug-2.5.5.tgz https://xdebug.org/files/xdebug-2.5.5.tgz \
+    && tar -xvzf xdebug-2.5.5.tgz \
+    && cd xdebug-2.5.5 \
     && phpize \
     && ./configure \
     && make \
@@ -100,6 +100,9 @@ RUN a2enmod actions ssl rewrite headers \
 # Configure PHP
 COPY /php-conf.d/shared/* /usr/local/etc/php/conf.d/
 COPY /php-conf.d/php7.0/* /usr/local/etc/php/conf.d/
+
+# Cleanup
+RUN rm -rf /tmp/* /var/cache/apk/* /var/lib/apt/lists/*
 
 # Run
 COPY /docker-entrypoint.sh /docker-entrypoint.sh

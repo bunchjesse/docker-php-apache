@@ -80,12 +80,13 @@ RUN cd /tmp \
     && mv modules/xdebug.so /usr/local/lib/php/extensions/no-debug-non-zts-20160303/
 
 # NodeJS
-RUN curl -sL https://deb.nodesource.com/setup_7.x | bash - \
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
     && apt-get install -y nodejs build-essential \
     && npm install -g parallelshell
 
 # Ruby and SASS
 RUN apt-get install -y rubygems \
+    && apt-get install -y ruby`ruby -e 'puts RUBY_VERSION[/\d+\.\d+/]'`-dev \
     && gem install sass sass-globbing
 
 # Working directory

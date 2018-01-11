@@ -82,7 +82,7 @@ RUN cd /tmp \
 # NodeJS
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
     && apt-get install -y nodejs build-essential \
-    && npm install -g parallelshell
+    && npm install -g parallelshell grunt gulp
 
 # Ruby and SASS
 RUN apt-get install -y rubygems \

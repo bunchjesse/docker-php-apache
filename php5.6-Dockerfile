@@ -67,9 +67,9 @@ RUN apt-get install -y \
 
 # Xdebug
 RUN cd /tmp \
-    && curl -o xdebug-2.5.5.tgz https://xdebug.org/files/xdebug-2.5.5.tgz \
-    && tar -xvzf xdebug-2.5.5.tgz \
-    && cd xdebug-2.5.5 \
+    && curl -o xdebug-2.6.0.tgz https://xdebug.org/files/xdebug-2.6.0.tgz \
+    && tar -xvzf xdebug-2.6.0.tgz \
+    && cd xdebug-2.6.0 \
     && phpize \
     && ./configure \
     && make \

@@ -61,7 +61,8 @@ RUN apt-get install -y \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-    && composer global require "hirak/prestissimo"
+    && composer global require "hirak/prestissimo" \
+    && printf "\nPATH=\"~/.composer/vendor/bin:\$PATH\"\n" | tee -a ~/.bashrc
 
 # Apache Extensions
 RUN cd /tmp \
@@ -88,6 +89,11 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
 RUN apt-get install -y rubygems \
     && apt-get install -y ruby`ruby -e 'puts RUBY_VERSION[/\d+\.\d+/]'`-dev \
     && gem install sass sass-globbing
+
+# Laravel
+RUN composer global require "laravel/installer" \
+    && composer global require "laravel/envoy" \
+    && composer global require "laravel/spark-installer"
 
 # Working directory
 WORKDIR /web/public

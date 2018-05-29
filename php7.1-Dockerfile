@@ -64,12 +64,6 @@ RUN apt-get install -y \
     && composer global require "hirak/prestissimo" \
     && printf "\nPATH=\"~/.composer/vendor/bin:\$PATH\"\n" | tee -a ~/.bashrc
 
-# Apache Extensions
-RUN cd /tmp \
-    && curl -o mod_cloudflare-trusty-amd64.latest.deb https://www.cloudflare.com/static/misc/mod_cloudflare/ubuntu/mod_cloudflare-trusty-amd64.latest.deb \
-    && dpkg -i mod_cloudflare-trusty-amd64.latest.deb \
-    && rm -f mod_cloudflare-trusty-amd64.latest.deb
-
 # Xdebug
 RUN cd /tmp \
     && curl -o xdebug-2.5.5.tgz https://xdebug.org/files/xdebug-2.5.5.tgz \

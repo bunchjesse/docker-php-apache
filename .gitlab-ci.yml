@@ -1,17 +1,29 @@
-build:
+.builds:
   stage: build
   image: docker:latest
   variables:
     DOCKER_DRIVER: overlay
   services:
-  - docker:dind
+    - docker:dind
   before_script:
-  - docker info
+    - docker info
   script:
-  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
-  - docker build . -f php5.6-Dockerfile -t registry.gitlab.com/bunchjesse/docker-apache-php:php5.6-apache2
-  - docker push registry.gitlab.com/bunchjesse/docker-apache-php:php5.6-apache2
-  - docker build . -f php7.0-Dockerfile -t registry.gitlab.com/bunchjesse/docker-apache-php:php7.0-apache2
-  - docker push registry.gitlab.com/bunchjesse/docker-apache-php:php7.0-apache2
-  - docker build . -f php7.1-Dockerfile -t registry.gitlab.com/bunchjesse/docker-apache-php:php7.1-apache2
-  - docker push registry.gitlab.com/bunchjesse/docker-apache-php:php7.1-apache2
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+
+build_7.0:
+  extends: .builds
+  script:
+    - docker build . -f php7.0-Dockerfile -t registry.gitlab.com/bunchjesse/docker-apache-php:php7.0-apache2
+    - docker push registry.gitlab.com/bunchjesse/docker-apache-php:php7.0-apache2
+
+build_7.1:
+  extends: .builds
+  script:
+    - docker build . -f php7.1-Dockerfile -t registry.gitlab.com/bunchjesse/docker-apache-php:php7.1-apache2
+    - docker push registry.gitlab.com/bunchjesse/docker-apache-php:php7.1-apache2
+
+build_7.2:
+  extends: .builds
+  script:
+    - docker build . -f php7.2-Dockerfile -t registry.gitlab.com/bunchjesse/docker-apache-php:php7.2-apache2
+    - docker push registry.gitlab.com/bunchjesse/docker-apache-php:php7.2-apache2

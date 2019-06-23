@@ -27,3 +27,9 @@ build_7.2:
   script:
     - docker build . -f php7.2-Dockerfile -t registry.gitlab.com/bunchjesse/docker-apache-php:php7.2-apache2
     - docker push registry.gitlab.com/bunchjesse/docker-apache-php:php7.2-apache2
+
+build_7.3:
+  extends: .builds
+  script:
+    - docker build . -f php7.3-Dockerfile -t registry.gitlab.com/bunchjesse/docker-apache-php:php7.3-apache2
+    - docker push registry.gitlab.com/bunchjesse/docker-apache-php:php7.3-apache2
